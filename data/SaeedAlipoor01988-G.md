@@ -53,14 +53,5 @@ examples\plugins\governance\multisig\Multisig.sol::72 => keccak256("UPDATE_MULTI
 examples\plugins\token\MerkleDistributor.sol::105 => bytes32 node = keccak256(abi.encodePacked(_index, _to, _amount));
 examples\plugins\token\MerkleMinter.sol::24 => bytes32 public constant MERKLE_MINT_PERMISSION_ID = keccak256("MERKLE_MINT_PERMISSION");
 examples\plugins\token\MerkleMinter.sol::28 => keccak256("CHANGE_DISTRIBUTOR_PERMISSION");
-examples\test\permission\PermissionManagerTest.sol::11 => bytes32 public constant TEST_PERMISSION_1_ID = keccak256("TEST_PERMISSION_1");
-examples\test\permission\PermissionManagerTest.sol::12 => bytes32 public constant TEST_PERMISSION_2_ID = keccak256("TEST_PERMISSION_2");
-examples\test\plugin\PluginMockData.sol::24 => keccak256("MOCK_PERMISSION")
-examples\test\plugin\PluginMockData.sol::41 => abi.encodeWithSelector(bytes4(keccak256("initialize(address)")), _dao)
-examples\test\plugin\PluginTest.sol::9 => bytes32 public constant DO_SOMETHING_PERMISSION_ID = keccak256("DO_SOMETHING_PERMISSION");
-examples\test\plugin\SharedPluginTest.sol::15 => bytes32 public constant ID_GATED_ACTION_PERMISSION_ID = keccak256("ID_GATED_ACTION_PERMISSION");
-examples\test\utils\InterfaceBasedRegistryMock.sol::8 => bytes32 public constant REGISTER_PERMISSION_ID = keccak256("REGISTER_PERMISSION");
 examples\token\ERC20\governance\GovernanceERC20.sol::28 => bytes32 public constant MINT_PERMISSION_ID = keccak256("MINT_PERMISSION");
 ```
-#### Tools used
-Manually
