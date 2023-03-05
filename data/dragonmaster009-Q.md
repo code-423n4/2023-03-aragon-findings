@@ -1,34 +1,66 @@
 At: https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/core/dao/DAO.sol 
 
+- Declare custom errors between contract declaration and import statements
+
 https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/core/permission/PermissionManager.sol 
+
+- Declare custom errors between contract declaration and import statements
 
 https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/core/utils/CallbackHandler.sol 
 
+- Declare custom errors between contract declaration and import statements
+
 https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/framework/dao/DAORegistry.sol 
+
+- Declare custom errors between contract declaration and import statements
 
 https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/framework/plugin/repo/PluginRepo.sol 
 
+- Declare custom errors between contract declaration and import statements
+
 https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/framework/plugin/repo/PluginRepoRegistry.sol 
+
+- Declare custom errors between contract declaration and import statements
 
 https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/framework/plugin/setup/PluginSetupProcessor.sol 
 
+- Declare custom errors between contract declaration and import statements
+
 https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/framework/utils/ens/ENSSubdomainRegistrar.sol 
+
+- Declare custom errors between contract declaration and import statements
 
 https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/framework/utils/InterfaceBasedRegistry.sol 
 
+- Declare custom errors between contract declaration and import statements
+
 https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/framework/utils/TokenFactory.sol
+
+- Declare custom errors between contract declaration and import statements
 
 https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/plugins/governance/admin/AdminSetup.sol
 
+- Declare custom errors between contract declaration and import statements
+
 https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/plugins/governance/majority-voting/token/TokenVoting.sol
+
+- Declare custom errors between contract declaration and import statements
 
 https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/plugins/governance/majority-voting/token/TokenVotingSetup.sol
 
+- Declare custom errors between contract declaration and import statements
+
 https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/plugins/governance/majority-voting/MajorityVotingBase.sol
+
+- Declare custom errors between contract declaration and import statements
 
 https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/plugins/governance/multisig/Multisig.sol
 
+- Declare custom errors between contract declaration and import statements
+
 https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/plugins/utils/Addresslist.sol
+
+- Declare custom errors between contract declaration and import statements
 
 https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/token/ERC20/governance/GovernanceERC20.sol
 
