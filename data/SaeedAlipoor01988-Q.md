@@ -52,3 +52,28 @@ manually
 follow https://eips.ethereum.org/EIPS/eip-4824 doc.
 
 ############################################################################################
+
+Title * 
+There is not any function to cover any underlyingTokens that would have been transferred by mistake in the GovernanceWrappedERC20.sol
+
+Links to affected code *
+https://github.com/code-423n4/2023-03-aragon/blob/4db573870aa4e1f40a3381cdd4ec006222e471fe/packages/contracts/src/token/ERC20/governance/GovernanceWrappedERC20.sol#L32
+https://github.com/OpenZeppelin/openzeppelin-contracts-upgradeable/blob/dd8ca8adc47624c5c5e2f4d412f5f421951dcc25/contracts/token/ERC20/extensions/ERC20WrapperUpgradeable.sol#L72
+
+## Impact
+There is not any function in the GovernanceWrappedERC20.sol.sol to Mint wrapped token to cover any underlyingTokens that would have been transferred by mistake.
+
+function 
+
+    function _recover(address account) internal virtual returns (uint256) {
+        uint256 value = _underlying.balanceOf(address(this)) - totalSupply();
+        _mint(account, value);
+        return value;
+    }
+
+is implemented in the ERC20WrapperUpgradeable.sol#L72 from openzeppelin-contracts-upgradeable as internally but  this function is not used in the GovernanceWrappedERC20. This is not necessary but it can be a solution to solve unexpected problems.
+
+## Tools Used
+manually
+
+############################################################################################
