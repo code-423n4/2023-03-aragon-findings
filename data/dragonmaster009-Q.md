@@ -69,7 +69,7 @@ https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/to
 At: https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/core/plugin/dao-authorizable/DaoAuthorizable.sol#L15
 https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/core/plugin/dao-authorizable/DaoAuthorizable.sol#L19
 
-- Use private variable naming convention (_var) (#L15)
+- Use private variable naming convention (#L15)
 
 `IDAO private immutable _dao;`
 
