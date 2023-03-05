@@ -1,18 +1,24 @@
-At: https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/core/dao/DAO.sol
-Line: 178, 182, 184
+At: https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/core/dao/DAO.sol#L178
+    https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/core/dao/DAO.sol#L182
+    https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/core/dao/DAO.sol#L184
 
-- Store `_actions.length` in stack.
+- Store `_actions.length` in stack
 
 `uint256 actionsLength = _actions.length;`
 
-- Don't explicitly set `i` to 0.
+- Don't explicitly set `i` to 0
 
 `for (uint256 i; i < actionsLength;) {`
 
-At: https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/core/permission/PermissionManager.sol
-Line: 150, 170, 260, 287, 328, 331, 328
+At: https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/core/permission/PermissionManager.sol#L150
+https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/core/permission/PermissionManager.sol#L170
+https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/core/permission/PermissionManager.sol#L260
+https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/core/permission/PermissionManager.sol#L287
+https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/core/permission/PermissionManager.sol#L328
+https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/core/permission/PermissionManager.sol#L331
+https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/core/permission/PermissionManager.sol#L328
 
-- Store `items.length` in stack.
+- Store `items.length` in stack
 
 `uint256 itemsLength = items.length;
  for (uint256 i; i < items.length;) {`
