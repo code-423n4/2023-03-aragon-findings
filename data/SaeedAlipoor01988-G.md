@@ -1,4 +1,4 @@
-###############  Use immutable for OpenZeppelin AccessControl's Roles Declarations
+###############  Use immutable for OpenZeppelin AccessControl's Roles Declarations ###############  
 
 #### Impact
 Issue Information: [G006](https://github.com/byterocket/c4-common-issues/blob/main/0-Gas-Optimizations.md#g006---use-immutable-for-openzeppelin-accesscontrols-roles-declarations)
@@ -54,4 +54,19 @@ examples\plugins\token\MerkleDistributor.sol::105 => bytes32 node = keccak256(ab
 examples\plugins\token\MerkleMinter.sol::24 => bytes32 public constant MERKLE_MINT_PERMISSION_ID = keccak256("MERKLE_MINT_PERMISSION");
 examples\plugins\token\MerkleMinter.sol::28 => keccak256("CHANGE_DISTRIBUTOR_PERMISSION");
 examples\token\ERC20\governance\GovernanceERC20.sol::28 => bytes32 public constant MINT_PERMISSION_ID = keccak256("MINT_PERMISSION");
+```
+
+###############  Getter functions for state variables ###############  
+
+#### Impact
+
+save gas cost by change string private _daoURI to string public _daoURI and remove function daoURI() external view returns (string memory).
+
+If you have public state variables in your contract, the compiler will create getter functions for these automatically. Therefore, if you have already defined public state variables, you don't have to write getter functions explicitly for those variables. It isn't recommended to write getter functions for public state variables. 
+https://www.oreilly.com/library/view/mastering-blockchain-programming/9781839218262/048537c8-6e8f-4cef-860a-b923a96946e3.xhtml
+
+#### Findings:
+```
+https://github.com/code-423n4/2023-03-aragon/blob/4db573870aa4e1f40a3381cdd4ec006222e471fe/packages/contracts/src/core/dao/DAO.sol#L70
+https://github.com/code-423n4/2023-03-aragon/blob/4db573870aa4e1f40a3381cdd4ec006222e471fe/packages/contracts/src/core/dao/DAO.sol#L320
 ```
