@@ -1,0 +1,8 @@
+{
+  "contest": 219,
+  "handle": "anodaram",
+  "risk": "2",
+  "title": "10**6 is too small for `RATIO_BASE`",
+  "issueId": 40,
+  "issueUrl": "https://github.com/code-423n4/2023-03-aragon-findings/issues/40"
+}
