@@ -70,3 +70,26 @@ https://www.oreilly.com/library/view/mastering-blockchain-programming/9781839218
 https://github.com/code-423n4/2023-03-aragon/blob/4db573870aa4e1f40a3381cdd4ec006222e471fe/packages/contracts/src/core/dao/DAO.sol#L70
 https://github.com/code-423n4/2023-03-aragon/blob/4db573870aa4e1f40a3381cdd4ec006222e471fe/packages/contracts/src/core/dao/DAO.sol#L320
 ```
+
+###############  Use Minimal Clones to deploy new DAO ###############  
+
+#### Impact
+
+Clones for cheap contract deployment
+There’s a way to save a significant amount of gas on deployment using Clones: https://www.youtube.com/watch?v=3Mw-pMmJ7TA .
+With the standard way using the new keyword, each contract created contains the entire logic. Using proxies allow only the first implementation to contain the logic, saving deployment costs on subsequent instances deployed.
+Cheap Contract Deployment Through Clones
+There’s a way to save a significant amount of gas on deployment using Clones: https://www.youtube.com/watch?v=3Mw-pMmJ7TA .
+This is a solution that was adopted, as an example, by Porter Finance. They realized that deploying using clones was 10x cheaper:
+https://github.com/porter-finance/v1-core/issues/15#issuecomment-1035639516
+https://github.com/porter-finance/v1-core/pull/34
+Consider applying a similar pattern.
+
+https://medium.com/taipei-ethereum-meetup/reason-why-you-should-use-eip1167-proxy-contract-with-tutorial-cbb776d98e53
+
+https://docs.openzeppelin.com/contracts/4.x/api/proxy#minimal_clones
+
+#### Findings:
+```
+https://github.com/code-423n4/2023-03-aragon/blob/4db573870aa4e1f40a3381cdd4ec006222e471fe/packages/contracts/src/framework/dao/DAOFactory.sol#L143
+```
