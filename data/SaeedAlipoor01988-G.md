@@ -93,3 +93,24 @@ https://docs.openzeppelin.com/contracts/4.x/api/proxy#minimal_clones
 ```
 https://github.com/code-423n4/2023-03-aragon/blob/4db573870aa4e1f40a3381cdd4ec006222e471fe/packages/contracts/src/framework/dao/DAOFactory.sol#L143
 ```
+
+###############  ++i/i++ should be unchecked{++i}/unchecked{i++} ###############  
+
+#### Impact
+
+++i/i++ should be unchecked{++i}/unchecked{i++} when it is not possible for them to overflow, as is the case when used in for- and while-loops
+The unchecked keyword is new in solidity version 0.8.0, so this only applies to that version or higher, which these instances are. This saves 30-40 gas per loop.
+
+use same pattern from core DAO :
+
+        for (uint256 i = 0; i < _actions.length; ) {
+
+            unchecked {
+                ++i;
+            }
+        }
+
+#### Findings:
+```
+https://github.com/code-423n4/2023-03-aragon/blob/4db573870aa4e1f40a3381cdd4ec006222e471fe/packages/contracts/src/framework/dao/DAOFactory.sol#L95
+```
