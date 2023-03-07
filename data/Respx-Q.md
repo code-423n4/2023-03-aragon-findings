@@ -1,0 +1,4 @@
+# Low
+
+## There is no way of removing a registered plugin from `PluginRepoRegistry`
+[`PluginRepoRegistry`](https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/framework/plugin/repo/PluginRepoRegistry.sol) itself does not directly modify the record of plugins in the registry: `InterfaceBasedRegistry.entries`. Its parent contract, `InterfaceBasedRegistry`, only has [code](https://github.com/code-423n4/2023-03-aragon/blob/4db573870aa4e1f40a3381cdd4ec006222e471fe/packages/contracts/src/framework/utils/InterfaceBasedRegistry.sol#L71) to modify values in  `entries` to `true`. If an untrustworthy plugin were registered, the only way to remove it from the registry would be to upgrade the contract to add functionality to set values in `InterfaceBasedRegistry.entries` to `false`.
