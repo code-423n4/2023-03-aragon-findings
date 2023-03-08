@@ -45,7 +45,7 @@ Vulnerability details
 
 ## Context:
 
-We recommend using header for Solidity code layout and readability
+We recommend using a header for Solidity code layout and readability
 
 For reference, see https://github.com/transmissions11/headers
 
