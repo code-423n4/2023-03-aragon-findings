@@ -1,0 +1,8 @@
+{
+  "contest": 219,
+  "handle": "ArmedGoose",
+  "risk": "3",
+  "title": "Funds can be stuck in DAO contract",
+  "issueId": 58,
+  "issueUrl": "https://github.com/code-423n4/2023-03-aragon-findings/issues/58"
+}
