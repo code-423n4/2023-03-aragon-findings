@@ -1,0 +1,8 @@
+{
+  "contest": 219,
+  "handle": "Bauer",
+  "risk": "2",
+  "title": "The protocol receive ETH, but no way to withdraw the ETH",
+  "issueId": 62,
+  "issueUrl": "https://github.com/code-423n4/2023-03-aragon-findings/issues/62"
+}
