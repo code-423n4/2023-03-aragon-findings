@@ -10,7 +10,9 @@
 
 # L-1 Lack of check for non existing contract
 
-In the DAO.execute() only the returned value success is checked. This is problematic because if the target address is not a contract (0 address or EOA) the call will not revert and will return true, and the failure will be bypassed.
+In the DAO.execute() only the returned value success is checked. This is problematic because if the 
+target address is not a contract (0 address or EOA) the call will not revert and will return true, 
+and the failure will be bypassed.
 
 ```solidity
 if (!success) {
@@ -27,15 +29,20 @@ if (!success) {
 
 ## Recommandation
 
-In addition to check the returned call value, consider checking if the  contract exists or not (by checking his size).
+In addition to check the returned call value, consider checking if the  contract exists or not 
+(by checking his size).
 
 # L-2 Unsafe ABI encoding
 
-It is not an uncommon practice to use abi.encodeWithSelector to generate calldata for a low-level call. This function is not type-safe. because the returned values are error-prone and should be considered unsafe.
+It is not an uncommon practice to use abi.encodeWithSelector to generate calldata for a low-level call.
+This function is not type-safe. because the returned values are error-prone and should be considered 
+unsafe.
 
 ## Recommandation
 
-Consider replacing all occurrences of unsafe ABI encodings with abi.encodeCall, which checks whether the supplied values actually match the types expected by the called function, and also avoids typographical errors.
+Consider replacing all occurrences of unsafe ABI encodings with abi.encodeCall, which checks whether the 
+supplied values actually match the types expected by the called function, and also avoids typographical
+errors.
 
 Occurence in :
 [PluginRepoFactory.sol#L122](https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/framework/plugin/repo/PluginRepoFactory.sol#L122)
@@ -65,5 +72,5 @@ Réf : openzeppelin
 Consider removing unecessary imported contracts, for exemple :
 
 [PluginRepo](https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/framework/dao/DAOFactory.sol#L8) in DAOFactory.sol contract
-[IERC1155Upgradeable](https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/core/dao/DAO.sol#LL11C59-L11C78) in .sol contract
-[IDAO](https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/core/plugin/membership/IMembership.sol#L5) in .sol contract
+[IERC1155Upgradeable](https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/core/dao/DAO.sol#LL11C59-L11C78) in DAO.sol contract
+[IDAO](https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/core/plugin/membership/IMembership.sol#L5) in IMembership.sol
