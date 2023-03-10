@@ -13,6 +13,19 @@
 
 ---
 
+### Summary of suggestions
+
+
+| Number       | Issue details                                           | Instances |
+| -------------- | --------------------------------------------------------- | :---------: |
+| [S-1](#S1) | When all actions are failable the transaction should revert.             |    1    |
+
+*Total: 1 suggestion.*
+
+---
+
+## Non critical issues
+
 ### <a id=NC1>[NC-1]</a> Lines are too long.
 
 ##### Description
@@ -264,4 +277,67 @@ File: [2023-03-aragon/packages/contracts/src/framework/utils/ens/ENSSubdomainReg
 
 ```solidity
 86: bytes32 subnode = keccak256(abi.encodePacked(node, _label));
+```
+
+---
+
+## Suggestions
+
+### <a id=S1>[S-1]</a> When all actions are failable the transaction should revert.
+
+##### Description
+
+According to the [documentation](https://github.com/code-423n4/2023-03-aragon/blob/ded3784e93e4189cf5bd08e5dd2b82da292b60ba/packages/contracts/docs/osx/01-how-it-works/01-core/01-dao/01-actions.md#allowing-for-failure), `actions` can fail as long as it is the intention of the DAO that implements them and they are included in `allowFailureMap`.
+
+I believe in an edge case where all the `actions` fail, the transaction should revert, so that the end user is better informed on what occured.
+I have included a modified test ([from `dao.ts`](https://github.com/code-423n4/2023-03-aragon/blob/ded3784e93e4189cf5bd08e5dd2b82da292b60ba/packages/contracts/test/core/dao/dao.ts)), where it is shown that the transaction succeeds even though all 256 actions fail.
+
+
+```solidity
+it('transaction succeeds when all actions fail', async () => {
+    let allowFailureMap = ethers.BigNumber.from(0);
+    let actions = [];
+
+    for (let i = 0; i < MAX_ACTIONS; i++) {
+        actions[i] = data.failAction;
+    }
+
+    // add all actions in the allowFailureMap
+    // to make sure tx succeeds.
+    for (let i = 0; i < MAX_ACTIONS; i++) {
+        allowFailureMap = flipBit(i, allowFailureMap);
+    }
+
+    // If the below call not fails, means allowFailureMap is correct.
+    let tx = await dao.execute(ZERO_BYTES32, actions, allowFailureMap);
+    let event = await findEvent(tx, EVENTS.Executed);
+
+    expect(event.args.actor).to.equal(ownerAddress);
+    expect(event.args.callId).to.equal(ZERO_BYTES32);
+
+    // construct the failureMap which only has those
+    // bits set at indexes where actions failed
+    let failureMap = ethers.BigNumber.from(0);
+    for (let i = 0; i < MAX_ACTIONS; i++) {
+        failureMap = flipBit(i, failureMap);
+    }
+    // Check that dao crrectly generated failureMap
+    expect(event.args.failureMap).to.equal(failureMap);
+
+    // Check that execResult emitted correctly stores action results.
+    for (let i = 0; i < MAX_ACTIONS; i++) {
+        expect(event.args.execResults[i]).to.includes(data.failActionMessage);
+        expect(event.args.execResults[i]).to.includes(errorSignature);
+    }
+    // for (let i = 3; i < 6; i++) {
+    //   expect(event.args.execResults[i]).to.equal(data.successActionResult);
+    // }
+
+    // lets remove one of the action from allowFailureMap
+    // to see tx will actually revert.
+    allowFailureMap = flipBit(200, allowFailureMap);
+    await expect(dao.execute(ZERO_BYTES32, actions, allowFailureMap))
+        .to.be.revertedWithCustomError(dao, 'ActionFailed')
+        .withArgs(200); // Since we unset the 200th action from failureMap, it should fail with that index.
+});
 ```
