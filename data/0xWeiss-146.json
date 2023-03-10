@@ -1,0 +1,8 @@
+{
+  "contest": 219,
+  "handle": "0xWeiss",
+  "risk": "3",
+  "title": "Make proposals fail, no-revert on error, loss of funds ",
+  "issueId": 146,
+  "issueUrl": "https://github.com/code-423n4/2023-03-aragon-findings/issues/146"
+}
