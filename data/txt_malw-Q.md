@@ -1,0 +1,2 @@
+"TokenVoting.createProposal(bytes,IDAO.Action[],uint256,uint64,uint64,IMajorityVoting.VoteOption,bool) (src/plugins/governance/majority-voting/token/TokenVoting.sol#71-134) uses a dangerous strict equality:
+\t- totalVotingPower_ == 0 (src/plugins/governance/majority-voting/token/TokenVoting.sol#87)
