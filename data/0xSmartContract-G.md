@@ -1846,7 +1846,7 @@ In 0.8.15 the conditions necessary for inlining are relaxed. Benchmarks show tha
 
 In 0.8.17 prevent the incorrect removal of storage writes before calls to Yul functions that conditionally terminate the external EVM call; Simplify the starting offset of zero-length operations to zero. More efficient overflow checks for multiplication.
 
-All contracts in scope (**62 files**) are written in ``pragma solidity ^0.8.17;`` and I recommend using the newer battle-tested version of Solidity ``0.8.19``.
+All contracts in scope (**62 files**) are written in ``pragma solidity 0.8.17;`` and I recommend using the newer battle-tested version of Solidity ``0.8.19``.
 
 
 **Context:**
