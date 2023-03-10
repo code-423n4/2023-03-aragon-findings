@@ -1,0 +1,8 @@
+{
+  "contest": 219,
+  "handle": "DevABDee",
+  "risk": "2",
+  "title": "Failed transfer with low-level call will not revert",
+  "issueId": 167,
+  "issueUrl": "https://github.com/code-423n4/2023-03-aragon-findings/issues/167"
+}
