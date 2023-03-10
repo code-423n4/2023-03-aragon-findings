@@ -1,5 +1,14 @@
 # QA REPORT
 
+### Summary of low-risk issues
+
+
+| Number       | Issue details                                           | Instances |
+| -------------- | --------------------------------------------------------- | :---------: |
+| [L-1](#L1) | ROOT should have full `auth` permissions.                     |    2    |
+| [L-2](#L2) | Granting lower level permissions to an address with higher ones should not emit the `Granted` event                      |    1    |
+
+*Total: 2 issues.*
 
 ### Summary of non-critical issues
 
@@ -23,6 +32,73 @@
 *Total: 1 suggestion.*
 
 ---
+
+## Low risk issues
+
+<a id=L1>[L-1]</a> ROOT should have full `auth` permissions.
+
+##### Description
+
+`grant`ing ROOT permission to an address (at all conditions) should mean full auth permissions to that address.
+The tests below fail and show that the `ALLOW_FLAG` is not set, despite having `ROOT` access for both `grant` and `grantWithCondition`. 
+[Link](https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/core/permission/PermissionManager.sol#L105-L127) to aforementioned code
+
+#### Proof of concept
+
+Add these two in `permission-manager.ts` file.
+
+```solidity
+it('ROOT should have full auth permissions', async () => {
+  await pm.grant(pm.address, otherSigner.address, ROOT_PERMISSION_ID); // granting ROOT access
+  const permission = await pm.getAuthPermission(
+    pm.address,
+    otherSigner.address,
+    ADMIN_PERMISSION_ID // checking ADMIN permission
+  );
+  expect(permission).to.be.equal(ALLOW_FLAG);
+});
+
+it('ROOT should have full auth permissions at all conditions', async () => {
+  await pm.grantWithCondition(
+    pm.address,
+    otherSigner.address,
+    ROOT_PERMISSION_ID, // granting ROOT access
+    ALLOW_FLAG
+  );
+  const permission = await pm.getAuthPermission(
+    pm.address,
+    otherSigner.address,
+    ADMIN_PERMISSION_ID // checking ADMIN permission
+  );
+  expect(permission).to.be.equal(ALLOW_FLAG);
+});
+```
+
+<a id=L2>[L-2]</a> Granting lower level permissions to an address with higher ones should not emit the `Granted` event.
+
+##### Description
+
+This issue is closely related to the previous one. Although an address has e.g. ROOT level access, `grant`ing lower level access emits the `Granted` event. 
+
+#### Proof of concept
+
+Add this failing test below in `permission-manager.ts` file.
+
+```solidity
+it('should not emit Granted when `who` already has higher level permissions', async () => {
+  await pm.grant(pm.address, otherSigner.address, ROOT_PERMISSION_ID);
+  await expect(
+    pm.grantWithCondition(
+      pm.address,
+      otherSigner.address,
+      ADMIN_PERMISSION_ID,
+      ALLOW_FLAG
+    )
+  ).to.not.emit(pm, 'Granted');
+});
+```
+
+
 
 ## Non critical issues
 
