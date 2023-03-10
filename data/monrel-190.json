@@ -1,0 +1,8 @@
+{
+  "contest": 219,
+  "handle": "monrel",
+  "risk": "2",
+  "title": "DAO can be locked if condition contract is destroyed",
+  "issueId": 190,
+  "issueUrl": "https://github.com/code-423n4/2023-03-aragon-findings/issues/190"
+}
