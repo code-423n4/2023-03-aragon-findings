@@ -11,6 +11,10 @@ FILE : 2023-03-aragon/packages/contracts/src/utils/Proxy.sol
 
 (https://github.com/code-423n4/2023-03-aragon/blob/4db573870aa4e1f40a3381cdd4ec006222e471fe/packages/contracts/src/utils/Proxy.sol#L5)
 
+FILE : 2023-03-aragon/packages/contracts/src/plugins/governance/majority-voting/addresslist/AddresslistVoting.sol
+
+(https://github.com/code-423n4/2023-03-aragon/blob/4db573870aa4e1f40a3381cdd4ec006222e471fe/packages/contracts/src/plugins/governance/majority-voting/addresslist/AddresslistVoting.sol#L185)
+
 ##
 ### [2] EXPRESSIONS FOR CONSTANT VALUES SUCH AS A CALL TO KECCAK256(), SHOULD USE IMMUTABLE RATHER THAN CONSTANT
 
@@ -87,9 +91,47 @@ FILE : 2023-03-aragon/packages/contracts/src/plugins/governance/majority-voting/
 
 (https://github.com/code-423n4/2023-03-aragon/blob/4db573870aa4e1f40a3381cdd4ec006222e471fe/packages/contracts/src/plugins/governance/majority-voting/MajorityVotingBase.sol#L238-L244)
 
+FILE : 2023-03-aragon/packages/contracts/src/plugins/governance/majority-voting/token/TokenVoting.sol
+
+    function initialize(
+        IDAO _dao,
+        VotingSettings calldata _votingSettings,
+        IVotesUpgradeable _token
+    ) external initializer {
+        __MajorityVotingBase_init(_dao, _votingSettings);
+
+        votingToken = _token;
+
+        emit MembershipContractAnnounced({definingContract: address(_token)});
+    }
+
+(https://github.com/code-423n4/2023-03-aragon/blob/4db573870aa4e1f40a3381cdd4ec006222e471fe/packages/contracts/src/plugins/governance/majority-voting/token/TokenVoting.sol#L36-L46)
+
+FILE : 2023-03-aragon/packages/contracts/src/framework/dao/DAOFactory.sol
+
+      constructor(DAORegistry _registry, PluginSetupProcessor _pluginSetupProcessor) {
+        daoRegistry = _registry;
+        pluginSetupProcessor = _pluginSetupProcessor;
+
+        daoBase = address(new DAO());
+      }
+
+(https://github.com/code-423n4/2023-03-aragon/blob/4db573870aa4e1f40a3381cdd4ec006222e471fe/packages/contracts/src/framework/dao/DAOFactory.sol#L53-L58)
+
+FILE : 2023-03-aragon/packages/contracts/src/framework/plugin/repo/PluginRepo.sol
+
+     function initialize(address initialOwner) external initializer {
+        __PermissionManager_init(initialOwner);
+
+        _grant(address(this), initialOwner, MAINTAINER_PERMISSION_ID);
+        _grant(address(this), initialOwner, UPGRADE_REPO_PERMISSION_ID);
+    }
+
+(https://github.com/code-423n4/2023-03-aragon/blob/4db573870aa4e1f40a3381cdd4ec006222e471fe/packages/contracts/src/framework/plugin/repo/PluginRepo.sol#L120-L125)
+
 Recommended Mitigation steps :
 
-Check address(0) before assigning values to address state variables 
+Check address(0) before assigning address values to state variables 
 
 ##
 
@@ -117,6 +159,17 @@ Use event in initialize function
      }
 
 (https://github.com/code-423n4/2023-03-aragon/blob/4db573870aa4e1f40a3381cdd4ec006222e471fe/packages/contracts/src/framework/utils/ens/ENSSubdomainRegistrar.sol#L57-L70)
+
+FILE : 2023-03-aragon/packages/contracts/src/framework/dao/DAOFactory.sol
+
+      constructor(DAORegistry _registry, PluginSetupProcessor _pluginSetupProcessor) {
+        daoRegistry = _registry;
+        pluginSetupProcessor = _pluginSetupProcessor;
+
+        daoBase = address(new DAO());
+      }
+
+(https://github.com/code-423n4/2023-03-aragon/blob/4db573870aa4e1f40a3381cdd4ec006222e471fe/packages/contracts/src/framework/dao/DAOFactory.sol#L53-L58)
 
 ##
 
@@ -168,6 +221,31 @@ FILE : 2023-03-aragon/packages/contracts/src/plugins/governance/majority-voting/
 
 (https://github.com/code-423n4/2023-03-aragon/blob/4db573870aa4e1f40a3381cdd4ec006222e471fe/packages/contracts/src/plugins/governance/majority-voting/MajorityVotingBase.sol#L97-L102)
 
+2023-03-aragon/packages/contracts/src/plugins/governance/multisig/Multisig.sol
+
+     contract Multisig is
+    IMultisig,
+    IMembership,
+    PluginUUPSUpgradeable,
+    ProposalUpgradeable,
+    Addresslist
+    {
+
+(https://github.com/code-423n4/2023-03-aragon/blob/4db573870aa4e1f40a3381cdd4ec006222e471fe/packages/contracts/src/plugins/governance/multisig/Multisig.sol#L18-L24)
+
+FILE : 2023-03-aragon/packages/contracts/src/framework/plugin/repo/PluginRepo.sol
+
+
+    contract PluginRepo is
+    Initializable,
+    ERC165Upgradeable,
+    IPluginRepo,
+    UUPSUpgradeable,
+    PermissionManager
+{
+
+(https://github.com/code-423n4/2023-03-aragon/blob/4db573870aa4e1f40a3381cdd4ec006222e471fe/packages/contracts/src/framework/plugin/repo/PluginRepo.sol#L19-L25)
+
 ##
 
 ### [8] NOT USING THE NAMED RETURN VARIABLES ANYWHERE IN THE FUNCTION IS CONFUSING
@@ -193,6 +271,54 @@ FILE : 2023-03-aragon/packages/contracts/src/plugins/governance/majority-voting/
 (https://github.com/code-423n4/2023-03-aragon/blob/4db573870aa4e1f40a3381cdd4ec006222e471fe/packages/contracts/src/plugins/governance/majority-voting/MajorityVotingBase.sol#L392-L406)
 
 (https://github.com/code-423n4/2023-03-aragon/blob/4db573870aa4e1f40a3381cdd4ec006222e471fe/packages/contracts/src/plugins/governance/majority-voting/MajorityVotingBase.sol#L564-L567)
+
+(https://github.com/code-423n4/2023-03-aragon/blob/4db573870aa4e1f40a3381cdd4ec006222e471fe/packages/contracts/src/plugins/governance/majority-voting/token/TokenVotingSetup.sol#L77-L80)
+(https://github.com/code-423n4/2023-03-aragon/blob/4db573870aa4e1f40a3381cdd4ec006222e471fe/packages/contracts/src/framework/dao/DAOFactory.sol#L141)
+
+##
+
+### [9] immutable variables should be write in capital letters
+
+(https://github.com/code-423n4/2023-03-aragon/blob/4db573870aa4e1f40a3381cdd4ec006222e471fe/packages/contracts/src/plugins/governance/majority-voting/token/TokenVotingSetup.sol#L30-L36)
+
+##
+
+### [10] Use OpenZeppelin safeCast library instead of normal casting 
+
+he SafeCast library provides a set of functions for safely casting between integer types in Solidity. These functions perform various checks to prevent integer overflows and underflows that can occur when performing type conversions
+
+FILE : 2023-03-aragon/packages/contracts/src/plugins/governance/multisig/Multisig.sol
+
+   175:   uint16 newAddresslistLength = uint16(addresslistLength() - _members.length);
+
+(https://github.com/code-423n4/2023-03-aragon/blob/4db573870aa4e1f40a3381cdd4ec006222e471fe/packages/contracts/src/plugins/governance/multisig/Multisig.sol#L175)
+ 
+   414:  uint16 addresslistLength_ = uint16(addresslistLength());
+
+(https://github.com/code-423n4/2023-03-aragon/blob/4db573870aa4e1f40a3381cdd4ec006222e471fe/packages/contracts/src/plugins/governance/multisig/Multisig.sol#L414)
+
+##
+
+### [11] Upgradeable contract is missing a __gap[50] storage variable
+
+Reference: [Storage_gaps](https://docs.openzeppelin.com/contracts/4.x/upgradeable#storage_gaps)
+
+You may notice that every contract includes a state variable named __gap. This is empty reserved space in storage that is put in place in Upgradeable contracts. It allows us to freely add new state variables in the future without compromising the storage compatibility with existing deployments.
+
+FILE : 2023-03-aragon/packages/contracts/src/framework/plugin/repo/PluginRepo.sol
+
+    contract PluginRepo is
+    Initializable,
+    ERC165Upgradeable,
+    IPluginRepo,
+    UUPSUpgradeable,
+    PermissionManager
+{
+
+(https://github.com/code-423n4/2023-03-aragon/blob/4db573870aa4e1f40a3381cdd4ec006222e471fe/packages/contracts/src/framework/plugin/repo/PluginRepo.sol#L19-L25)
+
+
+
 
 
 
