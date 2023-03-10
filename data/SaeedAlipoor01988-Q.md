@@ -10,9 +10,6 @@ When we call the setTrustedForwarder function in the DAO contract, we need first
 ## Tools Used
 manually
 
-## Recommended Mitigation Steps
-Use if block to check new trustedForwarder value with previous value.
-
 ############################################################################################
 
 Title * 
@@ -77,3 +74,26 @@ is implemented in the ERC20WrapperUpgradeable.sol#L72 from openzeppelin-contract
 manually
 
 ############################################################################################
+
+Title * 
+DAOFactory.createDao function is front-runnable and can cause DoS
+
+Links to affected code *
+https://github.com/code-423n4/2023-03-aragon/blob/4db573870aa4e1f40a3381cdd4ec006222e471fe/packages/contracts/src/framework/dao/DAOFactory.sol#L76
+https://github.com/code-423n4/2023-03-aragon/blob/4db573870aa4e1f40a3381cdd4ec006222e471fe/packages/contracts/src/framework/dao/DAOFactory.sol#L35
+https://github.com/code-423n4/2023-03-aragon/blob/4db573870aa4e1f40a3381cdd4ec006222e471fe/packages/contracts/src/framework/dao/DAORegistry.sol#L60
+https://github.com/code-423n4/2023-03-aragon/blob/4db573870aa4e1f40a3381cdd4ec006222e471fe/packages/contracts/src/framework/utils/ens/ENSSubdomainRegistrar.sol#L87
+
+## Impact
+DAOFactory.createDao function is a public function and anyone who wants to create dao needs to call this function with input data. one of the inputs is _daoSettings.subdomain. in ENSSubdomainRegistrar.sol#L87 we check the _daoSettings.subdomain, whether it is already registered or not? if already Registered, the call will get reverted AlreadyRegistered(subnode, currentOwner. if not, we will register the _daoSettings.subdomain for the new DAO.
+
+as you know malicious users can listen to the mempool and create new transactions with higher gas feefeesransactions with higher gas feefeesll get mined faster.
+
+## Proof of Concept
+USERA will call DAOFactory.createDao with _daoSettings.subdomain = "code4rena", the transaction will get created and sent to the mempool. now malicious user see the transaction of USERA  in mempool and create new transaction with _daoSettings.subdomain = "code4rena" and higher gas fee and send it to the blockchain. transaction from malicious user will get mine faster because of higher gas fee and now _daoSettings.subdomain = "code4rena" is already Registered. and transfaction from USERA will get revert AlreadyRegistered(subnode, currentOwner).
+
+## Tools Used
+Manually
+
+## Recommended Mitigation Steps
+make subdomain more unique in aragon protocol.
