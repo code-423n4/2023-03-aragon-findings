@@ -1,0 +1,8 @@
+{
+  "contest": 219,
+  "handle": "axiom",
+  "risk": "3",
+  "title": "A malicious actor can create a non malicious plugin, but then simply change the implementation of the plugin repo, allowing him to change the logic and create malicious plugins",
+  "issueId": 141,
+  "issueUrl": "https://github.com/code-423n4/2023-03-aragon-findings/issues/141"
+}
