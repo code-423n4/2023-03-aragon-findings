@@ -1,0 +1,8 @@
+{
+  "contest": 219,
+  "handle": "matrix_0wl",
+  "risk": "2",
+  "title": "INITIALIZE FUNCTION IN COUNTERV2.SOL CAN BE INVOKED MULTIPLE TIMES FROM THE IMPLEMENTATION CONTRACT",
+  "issueId": 117,
+  "issueUrl": "https://github.com/code-423n4/2023-03-aragon-findings/issues/117"
+}
