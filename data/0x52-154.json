@@ -1,0 +1,8 @@
+{
+  "contest": 219,
+  "handle": "0x52",
+  "risk": "2",
+  "title": "GovernanceWrappedERC20 isn't compatible with fee-on-transfer or rebasing tokens",
+  "issueId": 154,
+  "issueUrl": "https://github.com/code-423n4/2023-03-aragon-findings/issues/154"
+}
