@@ -803,15 +803,7 @@ Recommended Mitigation:
 
 
 
-NC-1	Missing checks for address(0) when assigning values to address state variables	1
-NC-2	Return values of approve() not checked	1
-NC-3	Event is missing indexed fields	26
-NC-4	Functions not used internally could be marked external	22
-NC-5	Typos	167
 
-L-1	abi.encodePacked() should not be used with dynamic types when passing the result to a hash function such as keccak256()	4
-L-2	Empty Function Body - Consider commenting why	11
-L-3	Initializers could be front-run	71
 
 
 
