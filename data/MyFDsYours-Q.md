@@ -72,5 +72,14 @@ Réf : openzeppelin
 Consider removing unecessary imported contracts, for exemple :
 
 [PluginRepo](https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/framework/dao/DAOFactory.sol#L8) in DAOFactory.sol contract
+```solidity
+import {PluginRepo} from "../plugin/repo/PluginRepo.sol";
+```
 [IERC1155Upgradeable](https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/core/dao/DAO.sol#LL11C59-L11C78) in DAO.sol contract
+```solidity
+import "@openzeppelin/contracts-upgradeable/token/ERC1155/IERC1155Upgradeable.sol";
+```
 [IDAO](https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/core/plugin/membership/IMembership.sol#L5) in IMembership.sol
+```solidity
+import {IDAO} from "../../dao/IDAO.sol";
+```
