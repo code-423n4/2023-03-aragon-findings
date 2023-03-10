@@ -23,10 +23,6 @@ At: https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/sr
 
 At: https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/core/permission/PermissionManager.sol#L150
 https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/core/permission/PermissionManager.sol#L170
-https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/core/permission/PermissionManager.sol#L260
-https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/core/permission/PermissionManager.sol#L287
-https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/core/permission/PermissionManager.sol#L328
-https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/core/permission/PermissionManager.sol#L331
 
 - Store `items.length` in stack (#L150)
 
@@ -37,13 +33,6 @@ https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/co
 
 `uint256 itemsLength = items.length;
  for (uint256 i; i < itemsLength;) {`
-
-- Use `_msgSender(), _msgData()` instead of `msg.sender, msg.data` (#L260, #L287, #L328, #L331)
-
-`emit Granted(_permissionId, _msgSender(), _where, _who, _condition);`
-`emit Revoked(_permissionId, _msgSender(), _where, _who);`
-`if (!isGranted(address(this), _msgSender(), _permissionId, _msgData())) {`
-`who: _msgSender(),`
 
 At: https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/framework/dao/DAOFactory.sol#L68
 https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/framework/dao/DAOFactory.sol#L95
