@@ -79,7 +79,7 @@ it('ROOT should have full auth permissions at all conditions', async () => {
 
 ##### Description
 
-This issue is closely related to the previous one. Although an address has e.g. ROOT level access, `grant`ing lower level access emits the `Granted` event. 
+This issue is closely related to the previous one. Although an address has e.g. ROOT level access, `grant`ing lower level access emits the `Granted` event. [Code](https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/core/permission/PermissionManager.sol#L105-L111)
 
 #### Proof of concept
 
@@ -99,11 +99,12 @@ it('should not emit Granted when `who` already has higher level permissions', as
 });
 ```
 
-### <a id=L2>[L-2]</a> New `pluginRepo` with gibberish subdomain should not be created.
+### <a id=L3>[L-3]</a> New `pluginRepo` with gibberish subdomain should not be created.
 
 ##### Description
 
 Although this is probably handled somewhere else in your web app, to prevent a subdomain with all spaces, consider adding a check that the subdomain does not start with a `-` or end in one. 
+[Link](https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/framework/plugin/repo/PluginRepoFactory.sol#L31-L36) to code.
 
 #### Proof of concept
 
