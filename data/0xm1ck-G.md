@@ -9,14 +9,14 @@ Using `memory` copies the struct or array in memory. Use `storage` to save the l
 
 *Instances (31)*:
 ```solidity
-File: src/core/dao/DAO.sol
+File: packages/contracts/src/core/dao/DAO.sol
 
 187:                 _actions[i].data
 
 ```
 
 ```solidity
-File: src/core/permission/PermissionManager.sol
+File: packages/contracts/src/core/permission/PermissionManager.sol
 
 152: 
 
@@ -25,28 +25,28 @@ File: src/core/permission/PermissionManager.sol
 ```
 
 ```solidity
-File: src/framework/dao/DAOFactory.sol
+File: packages/contracts/src/framework/dao/DAOFactory.sol
 
 160: 
 
 ```
 
 ```solidity
-File: src/framework/plugin/repo/PluginRepo.sol
+File: packages/contracts/src/framework/plugin/repo/PluginRepo.sol
 
 168:         bytes32 _tagHash = tagHash(tag);
 
 ```
 
 ```solidity
-File: src/framework/plugin/repo/PluginRepoFactory.sol
+File: packages/contracts/src/framework/plugin/repo/PluginRepoFactory.sol
 
 69: 
 
 ```
 
 ```solidity
-File: src/framework/plugin/setup/PluginSetupProcessor.sol
+File: packages/contracts/src/framework/plugin/setup/PluginSetupProcessor.sol
 
 299:             _params.pluginSetupRef.versionTag
 
@@ -61,14 +61,14 @@ File: src/framework/plugin/setup/PluginSetupProcessor.sol
 ```
 
 ```solidity
-File: src/framework/utils/TokenFactory.sol
+File: packages/contracts/src/framework/utils/TokenFactory.sol
 
 89:                 abi.encodeWithSelector(IERC20Upgradeable.balanceOf.selector, address(this))
 
 ```
 
 ```solidity
-File: src/plugins/counter-v1/CounterV1PluginSetup.sol
+File: packages/contracts/src/plugins/counter-v1/CounterV1PluginSetup.sol
 
 48:             bytes4(keccak256("initialize(address,address,uint256)")),
 
@@ -79,7 +79,7 @@ File: src/plugins/counter-v1/CounterV1PluginSetup.sol
 ```
 
 ```solidity
-File: src/plugins/counter-v2/CounterV2PluginSetup.sol
+File: packages/contracts/src/plugins/counter-v2/CounterV2PluginSetup.sol
 
 49:             bytes4(keccak256("initialize(address,address,uint256)")),
 
@@ -94,14 +94,14 @@ File: src/plugins/counter-v2/CounterV2PluginSetup.sol
 ```
 
 ```solidity
-File: src/plugins/governance/admin/AdminSetup.sol
+File: packages/contracts/src/plugins/governance/admin/AdminSetup.sol
 
 52: 
 
 ```
 
 ```solidity
-File: src/plugins/governance/majority-voting/addresslist/AddresslistVotingSetup.sol
+File: packages/contracts/src/plugins/governance/majority-voting/addresslist/AddresslistVotingSetup.sol
 
 31:             .decode(_data, (MajorityVotingBase.VotingSettings, address[]));
 
@@ -110,7 +110,7 @@ File: src/plugins/governance/majority-voting/addresslist/AddresslistVotingSetup.
 ```
 
 ```solidity
-File: src/plugins/governance/majority-voting/token/TokenVotingSetup.sol
+File: packages/contracts/src/plugins/governance/majority-voting/token/TokenVotingSetup.sol
 
 97: 
 
@@ -127,7 +127,7 @@ File: src/plugins/governance/majority-voting/token/TokenVotingSetup.sol
 ```
 
 ```solidity
-File: src/plugins/governance/multisig/MultisigSetup.sol
+File: packages/contracts/src/plugins/governance/multisig/MultisigSetup.sol
 
 30:             _data,
 
@@ -139,14 +139,14 @@ File: src/plugins/governance/multisig/MultisigSetup.sol
 
 *Instances (2)*:
 ```solidity
-File: src/framework/dao/DAOFactory.sol
+File: packages/contracts/src/framework/dao/DAOFactory.sol
 
 95:         for (uint256 i; i < _pluginSettings.length; ++i) {
 
 ```
 
 ```solidity
-File: src/framework/utils/RegistryUtils.sol
+File: packages/contracts/src/framework/utils/RegistryUtils.sol
 
 16:     for (uint256 i; i < nameLength; i++) {
 
@@ -157,7 +157,7 @@ File: src/framework/utils/RegistryUtils.sol
 
 *Instances (1)*:
 ```solidity
-File: src/framework/utils/RegistryUtils.sol
+File: packages/contracts/src/framework/utils/RegistryUtils.sol
 
 16:     for (uint256 i; i < nameLength; i++) {
 
@@ -168,7 +168,7 @@ Shifting left by N is like multiplying by 2^N and shifting right by N is like di
 
 *Instances (2)*:
 ```solidity
-File: src/plugins/token/MerkleDistributor.sol
+File: packages/contracts/src/plugins/token/MerkleDistributor.sol
 
 112:         uint256 claimedBit_index = _index % 256;
 
