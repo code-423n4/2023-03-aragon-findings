@@ -1,3 +1,17 @@
+## Summary
+[L-01] `_safeMint()` should be used rather than `_mint()` wherever possible
+[L-02] Draft OpenZeppelin Dependencies
+[L-03] Gas griefing/theft is possible on unsafe external call
+[L-04] `approve` should be replaced with `safeIncreaseAllowance()` / `safeDecreaseAllowance()`
+
+[NC-01] Constant redefined elsewhere
+[NC-02] Add a limit for the maximum number of characters per line
+[NC-03] Upgradeable contract is missing a __gap[50] storage variable to allow for new storage variables in later versions
+[NC-04] Mismatch between the filename and the contract name
+[NC-05] Adding a return statement when the function defines a named return variable, is redundant
+[NC-06] Use _ as a function name prefix 
+[NC-07] Method inherited from interface is missing the override keyword
+
 ### [L-01] `_safeMint()` should be used rather than `_mint()` wherever possible
 _mint() is [discouraged](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/d4d8d2ed9798cc3383912a23b5e8d5cb602f7d4b/contracts/token/ERC721/ERC721.sol#L271) in favor of _safeMint() which ensures that the recipient is either an EOA or implements IERC721Receiver. Both [OpenZeppelin](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/d4d8d2ed9798cc3383912a23b5e8d5cb602f7d4b/contracts/token/ERC721/ERC721.sol#L238-L250) and [solmate](https://github.com/Rari-Capital/solmate/blob/4eaf6b68202e36f67cab379768ac6be304c8ebde/src/tokens/ERC721.sol#L180) have versions of this function
 ```
@@ -100,7 +114,8 @@ https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/fr
 ```
 https://github.com/code-423n4/2023-03-aragon/blob/main/packages/contracts/src/framework/plugin/setup/PluginSetupProcessor.sol#L401
 
-### [NC-06] Proper use of _ as a function name prefix and a common pattern is to prefix internal and private function names with _
+### [NC-06] Use _ as a function name prefix
+It is a common pattern to prefix internal/private function names with _
 To improve code readability add _ to internal/private functions
 ```
 /src/core/permission/PermissionManager.sol
