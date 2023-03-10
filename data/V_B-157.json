@@ -1,0 +1,8 @@
+{
+  "contest": 219,
+  "handle": "V_B",
+  "risk": "2",
+  "title": "`createDao` is suspicious of the reorg attack",
+  "issueId": 157,
+  "issueUrl": "https://github.com/code-423n4/2023-03-aragon-findings/issues/157"
+}
