@@ -1,0 +1,8 @@
+{
+  "contest": 219,
+  "handle": "banky",
+  "risk": "2",
+  "title": "Inconsistent state when creating a dao with an empty subdomain",
+  "issueId": 108,
+  "issueUrl": "https://github.com/code-423n4/2023-03-aragon-findings/issues/108"
+}
