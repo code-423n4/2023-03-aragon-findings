@@ -61,3 +61,44 @@ For reference, see https://github.com/transmissions11/headers
 ## Tools Used
 
 Manual Analysis
+
+# 3: USE CONSTANTS FOR NUMBERS
+
+Vulnerability details
+
+## Context:
+
+In a few locations in the code, numbers like 0x20  are used. The same goes for values like: type(uint16).max, and type(uint160).max It is quite easy to make a mistake somewhere, also when comparing values.
+
+## Proof of Concept
+
+#### 0x20 Numbers
+
+> ***File src/framework/utils/TokenFactory.sol.sol***
+
+https://github.com/jauvany/2023-03-aragon/blob/8d3f26196a772248e417fc66c6d995e805a54f25/packages/contracts/src/framework/utils/TokenFactory.sol#L92 
+
+> ***File src/plugins/governance/majority-voting/token/TokenVotingSetup.sol***
+
+https://github.com/jauvany/2023-03-aragon/blob/8d3f26196a772248e417fc66c6d995e805a54f25/packages/contracts/src/plugins/governance/majority-voting/token/TokenVotingSetup.sol#L280 
+
+
+#### .max Values
+
+> ***src/plugins/governance/multisig/Multisig.sol***
+
+https://github.com/jauvany/2023-03-aragon/blob/8d3f26196a772248e417fc66c6d995e805a54f25/packages/contracts/src/plugins/governance/multisig/Multisig.sol#L159 
+
+https://github.com/jauvany/2023-03-aragon/blob/8d3f26196a772248e417fc66c6d995e805a54f25/packages/contracts/src/plugins/governance/multisig/Multisig.sol#L161  
+
+> ***src/core/permission/PermissionManager.sol***
+
+https://github.com/jauvany/2023-03-aragon/blob/8d3f26196a772248e417fc66c6d995e805a54f25/packages/contracts/src/core/permission/PermissionManager.sol#L18 
+
+## Tools Used
+
+Manual Analysis
+
+### Recommended Mitigation Steps
+
+We recommend defining constants for the above types of numbers used throughout the code.
