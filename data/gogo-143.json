@@ -1,0 +1,8 @@
+{
+  "contest": 219,
+  "handle": "gogo",
+  "risk": "2",
+  "title": "Incorrect EIP1271 magic value returned from DAO.isValidSignature",
+  "issueId": 143,
+  "issueUrl": "https://github.com/code-423n4/2023-03-aragon-findings/issues/143"
+}
