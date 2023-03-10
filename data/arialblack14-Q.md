@@ -6,9 +6,10 @@
 | Number       | Issue details                                           | Instances |
 | -------------- | --------------------------------------------------------- | :---------: |
 | [L-1](#L1) | ROOT should have full `auth` permissions.                     |    2    |
-| [L-2](#L2) | Granting lower level permissions to an address with higher ones should not emit the `Granted` event                      |    1    |
+| [L-2](#L2) | Granting lower level permissions to an address with higher ones should not emit the `Granted` event                      |    -    |
+| [L-3](#L3) | New pluginRepo with gibberish subdomain should not be created     |       - |
 
-*Total: 2 issues.*
+*Total: 3 issues.*
 
 ### Summary of non-critical issues
 
@@ -35,7 +36,7 @@
 
 ## Low risk issues
 
-<a id=L1>[L-1]</a> ROOT should have full `auth` permissions.
+### <a id=L1>[L-1]</a> ROOT should have full `auth` permissions.
 
 ##### Description
 
@@ -74,7 +75,7 @@ it('ROOT should have full auth permissions at all conditions', async () => {
 });
 ```
 
-<a id=L2>[L-2]</a> Granting lower level permissions to an address with higher ones should not emit the `Granted` event.
+### <a id=L2>[L-2]</a> Granting lower level permissions to an address with higher ones should not emit the `Granted` event.
 
 ##### Description
 
@@ -98,7 +99,25 @@ it('should not emit Granted when `who` already has higher level permissions', as
 });
 ```
 
+### <a id=L2>[L-2]</a> New `pluginRepo` with gibberish subdomain should not be created.
 
+##### Description
+
+Although this is probably handled somewhere else in your web app, to prevent a subdomain with all spaces, consider adding a check that the subdomain does not start with a `-` or end in one. 
+
+#### Proof of concept
+
+Add this failing test below in `plugin-repo-factory.ts` file.
+
+```solidity
+it('fail to create new pluginRepo with gibberish subdomain', async () => {
+  const pluginRepoSubdomain = '----'; // or '-a-' etc
+
+  await expect(
+    pluginRepoFactory.createPluginRepo(pluginRepoSubdomain, ownerAddress)
+  ).to.be.reverted;
+});
+```
 
 ## Non critical issues
 
