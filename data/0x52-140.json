@@ -1,0 +1,8 @@
+{
+  "contest": 219,
+  "handle": "0x52",
+  "risk": "2",
+  "title": "Multisig#createProposal snapshot block is inconsistent with minApproval setting",
+  "issueId": 140,
+  "issueUrl": "https://github.com/code-423n4/2023-03-aragon-findings/issues/140"
+}
