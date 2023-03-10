@@ -128,3 +128,14 @@ While the DIV opcode uses 5 gas, the SHR opcode only uses 3 gas. Furthermore, So
 
 https://github.com/code-423n4/2023-03-aragon/packages/contracts/src/plugins/token/MerkleDistributor.sol::111 => uint256 claimedWord_index = index / 256;
 https://github.com/code-423n4/2023-03-aragon/packages/contracts/src/plugins/token/MerkleDistributor.sol::121 => uint256 claimedWord_index = index / 256;
+
+## Not using the named return variables when a function returns, wastes deployment gas
+
+The return value of an external call is not stored in a local or state variable.
+
+PermissionManager.isGranted(address,address,bytes32,bytes) (https://github.com/code-423n4/2023-03-aragon/tree/main/packages/contracts/src/core/permission/PermissionManager.sol#297-323) ignores return value by IPermissionCondition(accessFlagOrCondition).isGranted(where,who,permissionId,data) (https://github.com/code-423n4/2023-03-aragon/tree/main/packages/contracts/src/core/permission/PermissionManager.sol#311-320)
+ENSSubdomainRegistrar.registerSubnode(bytes32,address) (https://github.com/code-423n4/2023-03-aragon/tree/main/packages/contracts/src/framework/utils/ens/ENSSubdomainRegistrar.sol#82-96) ignores return value by ens.setSubnodeOwner(node,label,address(this)) (https://github.com/code-423n4/2023-03-aragon/tree/main/packages/contracts/src/framework/utils/ens/ENSSubdomainRegistrar.sol#93)
+Addresslist.addAddresses(address[]) (https://github.com/code-423n4/2023-03-aragon/tree/main/packages/contracts/src/plugins/utils/Addresslist.sol#59-73) ignores return value by addresslistCheckpoints[newAddresses[i]].push(1) (https://github.com/code-423n4/2023-03-aragon/tree/main/packages/contracts/src/plugins/utils/Addresslist.sol#66)
+Addresslist.addAddresses(address[]) (https://github.com/code-423n4/2023-03-aragon/tree/main/packages/contracts/src/plugins/utils/Addresslist.sol#59-73) ignores return value by addresslistLengthCheckpoints.push(uncheckedAdd,newAddresses.length) (https://github.com/code-423n4/2023-03-aragon/tree/main/packages/contracts/src/plugins/utils/Addresslist.sol#72)
+Addresslist.removeAddresses(address[]) (https://github.com/code-423n4/2023-03-aragon/tree/main/packages/contracts/src/plugins/utils/Addresslist.sol#77-91) ignores return value by addresslistCheckpoints[exitingAddresses[i]].push(0) (https://github.com/code-423n4/2023-03-aragon/tree/main/packages/contracts/src/plugins/utils/Addresslist.sol#84)
+Addresslist.removeAddresses(address[]) (https://github.com/code-423n4/2023-03-aragon/tree/main/packages/contracts/src/plugins/utils/Addresslist.sol#77-91) ignores return value by addresslistLengthCheckpoints.push(uncheckedSub,exitingAddresses.length) (https://github.com/code-423n4/2023-03-aragon/tree/main/packages/contracts/src/plugins/utils/Addresslist.sol#90)
