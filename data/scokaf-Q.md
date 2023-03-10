@@ -102,3 +102,33 @@ Manual Analysis
 ### Recommended Mitigation Steps
 
 We recommend defining constants for the above types of numbers used throughout the code.
+
+# 4: ADD A LIMIT FOR THE MAXIMUM NUMBER OF CHARACTERS PER LINE					
+
+Vulnerability details
+
+## Impact:
+
+The solidity documentation recommends a maximum of 120 characters.
+
+For reference, see https://docs.soliditylang.org/en/v0.8.17/style-guide.html#maximum-line-length
+
+## Proof of Concept
+
+3 INSTANCES 3 FILES
+
+https://github.com/jauvany/2023-03-aragon/blob/8d3f26196a772248e417fc66c6d995e805a54f25/packages/contracts/src/framework/utils/InterfaceBasedRegistry.sol#L6 
+
+https://github.com/jauvany/2023-03-aragon/blob/8d3f26196a772248e417fc66c6d995e805a54f25/packages/contracts/src/framework/utils/TokenFactory.sol#L8 
+
+https://github.com/jauvany/2023-03-aragon/blob/8d3f26196a772248e417fc66c6d995e805a54f25/packages/contracts/src/plugins/governance/majority-voting/MajorityVotingBase.sol#L5 
+
+
+
+## Tools Used
+
+Manual Analysis
+
+## Recommended Mitigation Steps
+
+Consider adding a limit of 120 characters or less to prevent large lines.
