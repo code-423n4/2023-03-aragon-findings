@@ -49,6 +49,12 @@ File: `PluginSetupProcessor.sol`
 
 `inidcated` -> `indicated`
 
+File: `TokenVotingSetup.sol`
+
+`worng` -> `wrong`
+
+`deployes` -> `deploys`
+
 ### [NC-04] Functions are missing `override` keyword
 
 Functions from `IMajorityVotingBase.sol`  that are declared in its implementation `MajorityVotingBase.sol` are missing override keyword. Consider adding it.
