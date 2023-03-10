@@ -8,8 +8,9 @@
 | [G-05] | Initialize stack variables outside loop| 4 |
 | [G-06] | Increments can be unchecked | 2 |
 | [G-07] | State variables only set in the constructor should be declared `immutable` | 5 |
+| [G-08] | Remove function not used | 1 |
 
-| Total Gas-Optimization Issues | 7 |
+| Total Gas-Optimization Issues | 8 |
 |:--:|:--:|
 
 ### [G-01] Use nested `if` statements to avoid multiple check combinations using `&&`
@@ -267,3 +268,14 @@ This avoids a Gsset (20000 gas) in the constructor, and replaces each Gwarmacces
 
 Recommendation:
 Declare state variables only assigned in the constructor to be `immutable`
+
+### [G-08] Remove function not used
+```solidity
+1 result - 1 file
+
+/TokenFactory.sol
+8: function _uncheckedIncrement(uint256 i) pure returns (uint256)
+```
+
+Recommendation:
+Consider removing functions not used to save gas on deployment
