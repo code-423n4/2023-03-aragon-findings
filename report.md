@@ -465,24 +465,24 @@ For this audit, 24 reports were submitted by wardens detailing low risk and non-
 
 | |Issue|
 |-|:-|
-| [01] | `DAO.execute` FUNCTION DOES NOT CONSIDER TOKEN'S `transfer` OR `transferFrom` FUNCTION CALL THAT DOES NOT REVERT BUT RETURNS `false` AS A FAILURE |
-| [02] | `DAO.execute` FUNCTION DOES NOT CHECK IF `_actions[i].to` HAS ANY CONTRACT CODE WHEN `_actions[i].data` IS NOT EMPTY |
-| [03] | WHEN `_actions[i].data` IS NOT EMPTY, `DAO.execute` FUNCTION DOES NOT CHECK IF SUCH `_actions[i].data`'S FUNCTION EXISTS IN `_actions[i].to` CONTRACT |
-| [04] | `PermissionManager.revoke` TRANSACTION CAN BE FRONTRUN |
-| [05] | WHETHER `PermissionManager._grantWithCondition` FUNCTION SHOULD REVERT WHEN `_where == ANY_ADDR` OR `_who == ANY_ADDR` IS TRUE NEEDS TO BE RESOLVED |
-| [06] | `DAO` CONTRACT'S `receive()` CAN BE UPDATED TO CALL `DAO.deposit` FUNCTION WITH `_token` INPUT BEING `address(0)` |
-| [07] | UNLIKE `DAO.deposit`, `DAO` CONTRACT HAS NO FUNCTIONS FOR DEPOSITING ERC721 AND ERC1155 TO DAO |
-| [08] | `PermissionManager.applyMultiTargetPermissions` FUNCTION ALREADY COVERS USE CASES OF `PermissionManager.applySingleTargetPermissions` FUNCTION |
-| [09] | MISSING `address(0)` CHECKS FOR CRITICAL ADDRESS INPUTS |
-| [10] | REDUNDANT RETURN STATEMENTS FOR FUNCTIONS WITH NAMED RETURNS CAN BE REMOVED |
-| [11] | VULNERABILITIES IN VERSION 4.8.1 OF `@openzeppelin/contracts` AND `@openzeppelin/contracts-upgradeable` |
-| [12] | SOLIDITY VERSION `0.8.19` CAN BE USED |
-| [13] | DEFINITIONS OF `UNSET_FLAG` AND `ALLOW_FLAG` ARE INCORRECT IN DOCUMENTATION |
-| [14] | `bytes4(0)` CAN BE REPLACED WITH A CONSTANT |
-| [15] | `NewURI` EVENT CAN BE MOVED TO `IDAO` INTERFACE |
-| [16] | INPUT VARIABLE CAN BE NAMED WITH LEADING UNDERSCORE |
-| [17] | WORD TYPING TYPOS |
-| [18] | INCOMPLETE NATSPEC COMMENTS |
+|[01]| `DAO.execute` FUNCTION DOES NOT CONSIDER TOKEN'S `transfer` OR `transferFrom` FUNCTION CALL THAT DOES NOT REVERT BUT RETURNS `false` AS A FAILURE |
+|[02]| `DAO.execute` FUNCTION DOES NOT CHECK IF `_actions[i].to` HAS ANY CONTRACT CODE WHEN `_actions[i].data` IS NOT EMPTY |
+|[03]| WHEN `_actions[i].data` IS NOT EMPTY, `DAO.execute` FUNCTION DOES NOT CHECK IF SUCH `_actions[i].data`'S FUNCTION EXISTS IN `_actions[i].to` CONTRACT |
+|[04]| `PermissionManager.revoke` TRANSACTION CAN BE FRONTRUN |
+|[05]| WHETHER `PermissionManager._grantWithCondition` FUNCTION SHOULD REVERT WHEN `_where == ANY_ADDR` OR `_who == ANY_ADDR` IS TRUE NEEDS TO BE RESOLVED |
+|[06]| `DAO` CONTRACT'S `receive()` CAN BE UPDATED TO CALL `DAO.deposit` FUNCTION WITH `_token` INPUT BEING `address(0)` |
+|[07]| UNLIKE `DAO.deposit`, `DAO` CONTRACT HAS NO FUNCTIONS FOR DEPOSITING ERC721 AND ERC1155 TO DAO |
+|[08]| `PermissionManager.applyMultiTargetPermissions` FUNCTION ALREADY COVERS USE CASES OF `PermissionManager.applySingleTargetPermissions` FUNCTION |
+|[09]| MISSING `address(0)` CHECKS FOR CRITICAL ADDRESS INPUTS |
+|[10]| REDUNDANT RETURN STATEMENTS FOR FUNCTIONS WITH NAMED RETURNS CAN BE REMOVED |
+|[11]| VULNERABILITIES IN VERSION 4.8.1 OF `@openzeppelin/contracts` AND `@openzeppelin/contracts-upgradeable` |
+|[12]| SOLIDITY VERSION `0.8.19` CAN BE USED |
+|[13]| DEFINITIONS OF `UNSET_FLAG` AND `ALLOW_FLAG` ARE INCORRECT IN DOCUMENTATION |
+|[14]| `bytes4(0)` CAN BE REPLACED WITH A CONSTANT |
+|[15]| `NewURI` EVENT CAN BE MOVED TO `IDAO` INTERFACE |
+|[16]| INPUT VARIABLE CAN BE NAMED WITH LEADING UNDERSCORE |
+|[17]| WORD TYPING TYPOS |
+|[18]| INCOMPLETE NATSPEC COMMENTS |
 
 ## [01] `DAO.execute` FUNCTION DOES NOT CONSIDER TOKEN'S `transfer` OR `transferFrom` FUNCTION CALL THAT DOES NOT REVERT BUT RETURNS `false` AS A FAILURE
 Some tokens do not revert but return `false` when calling their `transfer` or `transferFrom` functions fail; to cover this scenario, OpenZeppelin's `SafeERC20` library would ensure that the corresponding return data must not be false by executing this [require](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/utils/SafeERC20.sol#L123) statement. However, for the same scenario, when calling the following `DAO.execute` function, if `_actions[i].to` corresponds to such token and `_actions[i].data`'s function is `transfer` or `transferFrom`, `success` would be set to true after executing `(bool success, bytes memory response) = to.call{value: _actions[i].value}(_actions[i].data)`, and this call would not be considered as a failure. As a result, the DAO can result in an unexpected state; for example, because transferring such tokens to the DAO fail silently, the DAO could falsely think that it has received the corresponding funds and update its accounting system incorrectly.
